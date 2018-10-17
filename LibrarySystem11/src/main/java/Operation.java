@@ -147,6 +147,36 @@ public class Operation {
         }
     }
 
+    /**
+     * displayBooksOrderreturn() method
+     *
+     * @purpose - This method is displays the details of students who have books.
+     */
+
+    public void displayBooksOrderreturn() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarysystem?useSSL=false", "root", "root");
+            preparedStatement = con.prepareStatement("Select * from bookdetail");
+            resultSet = preparedStatement.executeQuery();
+            boolean i = resultSet.next();
+            if (!i) {
+                System.out.println("Table is Empty");
+            }
+            System.out.println("");
+            System.out.println("Id | StudentId |    Student NAme    |          Book NAme      | Quantity | issuedate |    returndate    |   Fine");
+            while (i) {
+                System.out.println(resultSet.getInt(1) + "      " + resultSet.getInt(2) + "         " + resultSet.getString(3) + "                " + resultSet.getString(4) + "                     " + resultSet.getInt(5) + "        " + resultSet.getString(6) + "           " + resultSet.getString(7) + "          " + resultSet.getInt(8));
+                i = resultSet.next();
+            }
+
+        } catch (SQLException s) {
+            s.printStackTrace();
+        } catch (ClassNotFoundException s) {
+            s.printStackTrace();
+        }
+    }
+
 
     /**
      * orderBooks() Method
@@ -209,8 +239,7 @@ public class Operation {
                 u.printStackTrace();
                 return;
             }
-            if(bookoriginalquantity==0)
-            {
+            if (bookoriginalquantity == 0) {
                 System.out.println("This Book Is Not Available");
                 return;
             }
@@ -267,6 +296,7 @@ public class Operation {
      */
 
     public void returnBooks() {
+        displayBooksOrderreturn();
         String bookname = "";
         String bookoriginalname = "";
         int quantity = 0;
