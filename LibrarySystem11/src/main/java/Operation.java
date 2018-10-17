@@ -61,8 +61,8 @@ public class Operation {
                 return;
             }
 
-            preparedStatement = con.prepareStatement("select * from addbook");
-            preparedStatement1 = con.prepareStatement("insert into addbook values(?,?,?);");
+            preparedStatement = con.prepareStatement("select * from addbooks");
+            preparedStatement1 = con.prepareStatement("insert into addbooks values(?,?,?);");
             resultSet = preparedStatement.executeQuery();
             boolean i = resultSet.last();
             if (!i) {
@@ -87,7 +87,7 @@ public class Operation {
                 }
             }
             if (found == 1) {
-                preparedStatement2 = con.prepareStatement("update addbook set quantity=" + bookquantity + " where id=" + originalid + ";");
+                preparedStatement2 = con.prepareStatement("update addbooks set quantity=" + bookquantity + " where id=" + originalid + ";");
                 preparedStatement2.executeUpdate();
 
                 System.out.println("");
@@ -209,11 +209,16 @@ public class Operation {
                 u.printStackTrace();
                 return;
             }
+            if(bookoriginalquantity==0)
+            {
+                System.out.println("This Book Is Not Available");
+                return;
+            }
             System.out.println("Enter The Quantity (Quantity must be less than " + bookoriginalquantity + " and greater than 0)");
             quantity = Integer.parseInt(bufferedReader.readLine());
             try {
 
-                if (quantity >= bookoriginalquantity) {
+                if (quantity > bookoriginalquantity) {
                     throw new UserException("Enter Valid Quantity");
                 } else {
                     bookoriginalquantity = bookoriginalquantity - quantity;
