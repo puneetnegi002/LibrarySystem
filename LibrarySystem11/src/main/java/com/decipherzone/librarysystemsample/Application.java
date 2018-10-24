@@ -1,9 +1,22 @@
+package com.decipherzone.librarysystemsample;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 
-public class Menu {
+/**
+ * com.decipherzone.librarysystemsample.Application Class To Perform several Task
+ *
+ * @implnote- In this menu class we have 5 choices :-
+ * >>>1.Addbooks :- To add books in database
+ * >>>2.DisplayBooks :- To display books from database
+ * >>>3.orderBooks :- To order books from database and make seperate table for the user who ordered.
+ * >>>4.returnBooks :- To return the ordered books.
+ * >>>5.Exit :- To Exit From The com.decipherzone.librarysystemsample.Application.
+ */
+
+public class Application {
     public static void main(String[] args) throws IOException, SQLException {
 
         int choice;
