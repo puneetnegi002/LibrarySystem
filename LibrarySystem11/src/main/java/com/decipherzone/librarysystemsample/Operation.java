@@ -8,8 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,14 +26,8 @@ import java.util.List;
  */
 
 public class Operation {
-    private Connection con = null;
-    private PreparedStatement preparedStatement, preparedStatement1, preparedStatement2, preparedStatement3 = null;
-    private ResultSet resultSet, resultSet1, resultSet2 = null;
     private BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-    private int day = 0;
-    private int month = 0;
-    private int year = 0;
-    DbOperations DbOperations = new DbOperations();
+    private DbOperations DbOperations = new DbOperations();
 
     /**
      * addbook() Method
@@ -393,7 +385,6 @@ public class Operation {
             String returndate = returnyear + "-" + returnmonth + "-" + returnday;
             DbOperations.returnDateandQuantityUpdate(returndate, quantity, studentid);
             int datediff = DbOperations.dateDiff(studentid);
-            System.out.println(datediff + "asssssdfdc");
             int addbookquantity = DbOperations.addbookQuantity(id);
             addbookquantity = returnquantity + addbookquantity;
             DbOperations.updateaddbook(addbookquantity, id);

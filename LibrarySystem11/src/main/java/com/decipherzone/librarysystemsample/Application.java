@@ -1,5 +1,7 @@
 package com.decipherzone.librarysystemsample;
 
+import com.decipherzone.librarysystemsample.db.MongoDbOperation;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,34 +21,79 @@ import java.sql.SQLException;
 public class Application {
     public static void main(String[] args) throws IOException, SQLException {
 
-        int choice;
+        int choice, option;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         Operation operation = new Operation();
-
+       MongoOperation mongoOperation=new MongoOperation();
         do {
             System.out.print("Enter your choice");
-            System.out.println("\n1.Add Books \n2.Display Books Currently Presents \n3.Order Books \n4.Return Books \n5.Exit");
+            System.out.println("\n1.Use MongoDB \n2.Use MySql \n3.Exit");
             try {
-                choice = Integer.parseInt(bufferedReader.readLine());
+                option = Integer.parseInt(bufferedReader.readLine());
             } catch (NumberFormatException ex) {
-                choice = 0;
+                option = 0;
                 ex.printStackTrace();
             }
 
-            if (choice == 1) {
-                operation.addBook();
-            } else if (choice == 2) {
-                operation.displayBooks();
-            } else if (choice == 3) {
-                operation.orderBooks();
-            } else if (choice == 4) {
-                operation.returnBooks();
-            } else if (choice == 5) {
+            if (option == 1) {
+                do {
+                    System.out.print("Enter your choice");
+                    System.out.println("\n1.Add Books \n2.Display Books Currently Presents \n3.Order Books \n4.Return Books \n5.Exit");
+                    try {
+                        choice = Integer.parseInt(bufferedReader.readLine());
+                    } catch (NumberFormatException ex) {
+                        choice = 0;
+                        ex.printStackTrace();
+                    }
+
+                    if (choice == 1) {
+                        mongoOperation.addBook();
+                    } else if (choice == 2) {
+                        mongoOperation.displayBooks();
+                    } else if (choice == 3) {
+                        mongoOperation.orderBooks();
+                    } else if (choice == 4) {
+                        mongoOperation.returnBooks();
+                    } else if (choice == 5) {
+
+                    } else {
+                        System.out.println("Wrong Choice");
+                    }
+                }
+                while (choice != 5);
+            } else if (option== 2) {
+                do {
+                    System.out.print("Enter your choice");
+                    System.out.println("\n1.Add Books \n2.Display Books Currently Presents \n3.Order Books \n4.Return Books \n5.Exit");
+                    try {
+                        choice = Integer.parseInt(bufferedReader.readLine());
+                    } catch (NumberFormatException ex) {
+                        choice = 0;
+                        ex.printStackTrace();
+                    }
+
+                    if (choice == 1) {
+                        operation.addBook();
+                    } else if (choice == 2) {
+                        operation.displayBooks();
+                    } else if (choice == 3) {
+                        operation.orderBooks();
+                    } else if (choice == 4) {
+                        operation.returnBooks();
+                    } else if (choice == 5) {
+
+                    } else {
+                        System.out.println("Wrong Choice");
+                    }
+                }
+                while (choice != 5);
+            } else if (option == 3) {
                 System.exit(0);
             } else {
                 System.out.println("Wrong Choice");
             }
-        }
-        while (choice != 5);
+
+        } while (option != 3);
+
     }
 }
